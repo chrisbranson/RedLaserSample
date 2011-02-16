@@ -16,6 +16,7 @@
     <BundleDisplayName>RL C# Sample</BundleDisplayName>
     <MtouchMinimumOS>3.1</MtouchMinimumOS>
     <MtouchSdkVersion>4.0</MtouchSdkVersion>
+    <MainNibFile>MainWindow.xib</MainNibFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,34 +86,64 @@
   </ProjectExtensions>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppController.cs" />
-    <Compile Include="SampleViewController.cs" />
-    <Compile Include="BarcodeOverlayController.cs" />
+    <Compile Include="MainWindow.xib.designer.cs">
+      <DependentUpon>MainWindow.xib</DependentUpon>
+    </Compile>
+    <Compile Include="ScanOverlay.xib.designer.cs">
+      <DependentUpon>ScanOverlay.xib</DependentUpon>
+    </Compile>
+    <Compile Include="RLSampleAppDelegate.cs" />
+    <Compile Include="RLSampleViewController.cs" />
+    <Compile Include="OverlayController.cs" />
+    <Compile Include="RLSampleViewController.xib.designer.cs">
+      <DependentUpon>RLSampleViewController.xib</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Lib\" />
-    <Folder Include="RedLaser\" />
     <Folder Include="Sounds\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lib\libRedLaserSDK.a" />
     <None Include="Icon.png" />
     <None Include="Lib\x_sim.o" />
     <None Include="Lib\x.o" />
-    <None Include="README.TXT" />
     <None Include="Info.plist" />
+    <None Include="..\README.TXT">
+      <Link>README.TXT</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RedLaser\bolt.png" />
-    <Content Include="RedLaser\botbar.png" />
-    <Content Include="RedLaser\cancel_down.png" />
-    <Content Include="RedLaser\cancel.png" />
-    <Content Include="RedLaser\green_down_arrow.png" />
-    <Content Include="RedLaser\green_up_arrow.png" />
-    <Content Include="RedLaser\RedLaserOverlay_UPCE.png" />
-    <Content Include="RedLaser\RedLaserOverlay.png" />
-    <Content Include="RedLaser\white_down_arrow.png" />
-    <Content Include="RedLaser\white_up_arrow.png" />
     <Content Include="Sounds\beep.wav" />
+    <Content Include="Images\bolt.png" />
+    <Content Include="Images\botbar.png" />
+    <Content Include="Images\cancel_down.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\green_down_arrow.png" />
+    <Content Include="Images\green_up_arrow.png" />
+    <Content Include="Images\RedLaserOverlay_UPCE.png" />
+    <Content Include="Images\RedLaserOverlay.png" />
+    <Content Include="Images\white_down_arrow.png" />
+    <Content Include="Images\white_up_arrow.png" />
+    <Content Include="Images\powered_by_redlaser.png" />
+    <Content Include="Images\powered_by_redlaser%402x.png" />
+    <Content Include="Images\RedLaserOverlay_DE_EAN.png" />
+    <Content Include="Images\RedLaserOverlay_DE_EAN%402x.png" />
+    <Content Include="Images\RedLaserOverlay_DE_EAN8.png" />
+    <Content Include="Images\RedLaserOverlay_DE_EAN8%402x.png" />
+    <Content Include="Images\RedLaserOverlay_DE_UPCE.png" />
+    <Content Include="Images\RedLaserOverlay_DE_UPCE%402x.png" />
+    <Content Include="Images\RedLaserOverlay_EAN.png" />
+    <Content Include="Images\RedLaserOverlay_EAN8.png" />
+    <Content Include="Images\RedLaserOverlay_EAN8%402x.png" />
+    <Content Include="Images\RedLaserOverlay_UPCE%402x.png" />
+    <Content Include="Images\redlaser-stripe.png" />
+    <Content Include="Images\redlaser-stripe%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xib" />
+    <Page Include="ScanOverlay.xib" />
+    <Page Include="RLSampleViewController.xib" />
   </ItemGroup>
 </Project>

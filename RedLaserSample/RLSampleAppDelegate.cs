@@ -21,23 +21,18 @@ using System;
 
 namespace RedLaserSample
 {
-	[Register ("AppController")]
-	public class AppController : UIApplicationDelegate
+	public partial class RLSampleAppDelegate : UIApplicationDelegate
 	{
-		UIWindow window;
-		SampleViewController viewController;
+		//UIWindow window;
+		//RLSampleViewController viewController;
 
 		public override void FinishedLaunching (UIApplication application)
 		{
-			// srtup status bar style
+			// setup status bar style
 			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.BlackOpaque;
-			
-			// create the view controller
-			viewController = new SampleViewController();
-			
-			// Create the main window and add the controller as a subview
-            window = new UIWindow (UIScreen.MainScreen.Bounds);
-            window.AddSubview(viewController.View);
+		
+			//viewController = new RLSampleViewController ();
+			window.AddSubview (viewController.View);
             window.MakeKeyAndVisible ();
 		}
 

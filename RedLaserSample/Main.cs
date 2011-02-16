@@ -24,7 +24,7 @@ namespace RedLaserSample
         {
 			try
 			{
-            		UIApplication.Main (args, null, "AppController");
+            		UIApplication.Main (args, null, "RLSampleAppDelegate");
 			}
 			catch (Exception ex)
 			{	
