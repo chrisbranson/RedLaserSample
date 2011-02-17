@@ -92,7 +92,7 @@ namespace RedLaserSample
 			
 			// Animate the UI changes
 			CGAffineTransform transform = CGAffineTransform.MakeRotation (0);
-			this.View.Transform = transform;
+			//this.View.Transform = transform;
 			UIView.BeginAnimations ("rotateToPortrait");
 			//UIView.SetAnimationDelegate = this;
 			UIView.SetAnimationCurve (UIViewAnimationCurve.Linear);
@@ -118,7 +118,7 @@ namespace RedLaserSample
 			
 			// Animate the UI changes
 			CGAffineTransform transform = CGAffineTransform.MakeRotation (3.14159f/2.0f);
-			this.View.Transform = transform;
+			//this.View.Transform = transform;
 			UIView.BeginAnimations ("rotateToLandscape");
 			//UIView.SetAnimationDelegate = this;
 			UIView.SetAnimationCurve (UIViewAnimationCurve.Linear);
