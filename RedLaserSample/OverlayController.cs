@@ -3,6 +3,7 @@
  * 
  * Chris Branson, November 2009
  * Chris Branson, August 2010 - updated to support RedLaser SDK 2.8.2
+ * Chris Branson, April 2011 - updated to support RedLaser SDK 3.0.0
  * 
  * This is the sample view controller and demonstrates initialisation of
  * the barcode picker controller, setting of properties and handling
@@ -29,10 +30,8 @@ using RedLaser;
 
 namespace RedLaserSample
 {
-	public partial class OverlayController : UIViewController
+	public partial class OverlayController : CameraOverlayViewController
 	{
-		public BarcodePickerController parentPicker { get; set; }
-		
 		CAShapeLayer _rectLayer;
 		bool _isSilent;
 		
@@ -48,10 +47,10 @@ namespace RedLaserSample
 		
 		partial void cancelPressed (MonoTouch.UIKit.UIBarButtonItem sender)
 		{
-			if (parentPicker != null)
+			if (ParentPicker != null)
 			{
-				// Pass-through the cancel operation
-				parentPicker.Cancel ();
+				// Tell the picker we're done
+				ParentPicker.DoneScanning ();
 			}
 		}
 		
@@ -60,12 +59,12 @@ namespace RedLaserSample
 			if (flashButton.Style == UIBarButtonItemStyle.Bordered)
 			{
 				flashButton.Style = UIBarButtonItemStyle.Done;
-				parentPicker.TurnFlash (true);
+				ParentPicker.TurnFlash (true);
 			}
 			else
 			{
 				flashButton.Style = UIBarButtonItemStyle.Bordered;
-				parentPicker.TurnFlash (false);
+				ParentPicker.TurnFlash (false);
 			}
 		}
 		
@@ -82,13 +81,13 @@ namespace RedLaserSample
 		void setPortraitLayout ()
 		{
 			// Set portrait
-			parentPicker.Orientation = UIImageOrientation.Up;
+			ParentPicker.Orientation = UIImageOrientation.Up;
 			
 			// Set the active scanning region for portrait mode
-			parentPicker.ActiveRegion = new RectangleF (0, 100, 320, 250);
+			ParentPicker.ActiveRegion = new RectangleF (0, 100, 320, 250);
 			
 			// Activate the new settings
-			parentPicker.ResumeScanning ();
+			ParentPicker.ResumeScanning ();
 			
 			// Animate the UI changes
 			CGAffineTransform transform = CGAffineTransform.MakeRotation (0);
@@ -108,13 +107,13 @@ namespace RedLaserSample
 		void setLandscapeLayout ()
 		{
 			// Set landscape
-			parentPicker.Orientation = UIImageOrientation.Right;
+			ParentPicker.Orientation = UIImageOrientation.Right;
 			
 			// Set the active scanning region for portrait mode
-			parentPicker.ActiveRegion = new RectangleF (100, 0, 120, 436);
+			ParentPicker.ActiveRegion = new RectangleF (100, 0, 120, 436);
 			
 			// Activate the new settings
-			parentPicker.ResumeScanning ();
+			ParentPicker.ResumeScanning ();
 			
 			// Animate the UI changes
 			CGAffineTransform transform = CGAffineTransform.MakeRotation (3.14159f/2.0f);
@@ -134,7 +133,7 @@ namespace RedLaserSample
 		partial void rotatePressed (MonoTouch.UIKit.UIBarButtonItem sender)
 		{
 			// Swap the orientation
-			if (parentPicker.Orientation == UIImageOrientation.Up)
+			if (ParentPicker.Orientation == UIImageOrientation.Up)
 			{
 				setLandscapeLayout ();
 			}
@@ -153,10 +152,10 @@ namespace RedLaserSample
 		
 		void setActiveRegionRect ()
 		{
-			_rectLayer.Frame = new RectangleF (parentPicker.ActiveRegion.X,
-			                                   parentPicker.ActiveRegion.Y,
-			                                   parentPicker.ActiveRegion.Width,
-			                                   parentPicker.ActiveRegion.Height);
+			_rectLayer.Frame = new RectangleF (ParentPicker.ActiveRegion.X,
+			                                   ParentPicker.ActiveRegion.Y,
+			                                   ParentPicker.ActiveRegion.Width,
+			                                   ParentPicker.ActiveRegion.Height);
 			
 			CGPath path = newPathInRect (_rectLayer.Bounds);
 			_rectLayer.Path = path;
@@ -187,60 +186,69 @@ namespace RedLaserSample
 			_isSilent = NSUserDefaults.StandardUserDefaults.BoolForKey("silent_pref");
 			
 			// set camera view
-			parentPicker.CameraView = cameraView;
+			//parentPicker.CameraView = cameraView;
 		}
-	
-		internal class OverlayDelegate : RedLaser.RealtimeOverlayDelegate
+		
+		public override void ViewWillAppear (bool animated)
 		{
-			OverlayController controller;
+			if (ParentPicker.Orientation == UIImageOrientation.Up)
+				setPortraitLayout ();
+			else
+				setLandscapeLayout ();
 			
-			public OverlayDelegate (OverlayController controller)
+			if (!ParentPicker.HasFlash)
 			{
-				this.controller = controller;
+				flashButton.Enabled = false;
+			}
+			else
+			{
+				flashButton.Enabled = true;
+				flashButton.Style = UIBarButtonItemStyle.Bordered;
 			}
 			
-			public override void PickerAppeared (BarcodePickerController picker)
+			textCue.Text = "";
+		}
+		
+		// In the status dictionary:
+	
+		// "FoundBarcodes" key is a NSSet of all discovered barcodes this scan session
+		// "NewFoundBarcodes" is a NSSet of barcodes discovered in the most recent pass.
+			// When a barcode is found, it is added to both sets. The NewFoundBarcodes
+			// set is cleaned out each pass.
+		
+		// "Guidance" can be used to help guide the user through the process of discovering
+		// a long barcode in sections. Currently only works for Code 39.
+		
+		// "Valid" is TRUE once there are valid barcode results.
+		// "InRange" is TRUE if there's currently a barcode detected the viewfinder. The barcode
+		//		may not have been decoded yet.
+		public override void StatusUpdated (BarcodePickerController picker, NSDictionary status)
+		{
+			NSNumber isValid = (NSNumber) status.ObjectForKey (new NSString ("Valid"));
+			NSNumber inRange = (NSNumber) status.ObjectForKey (new NSString ("InRange"));
+			
+			SetArrows (inRange.BoolValue, true);
+			
+			if (isValid.BoolValue)
 			{
+				BeepOrVibrate ();
+				ParentPicker.DoneScanning ();
 			}
 			
-			public override void PickerAppearing (BarcodePickerController controller)
+			NSNumber guidanceLevel = (NSNumber) status.ObjectForKey (new NSString ("Guidance"));
+			if (guidanceLevel != null)
 			{
-				if (this.controller.parentPicker.Orientation == UIImageOrientation.Up)
-					this.controller.setPortraitLayout ();
-				else
-					this.controller.setLandscapeLayout ();
-				
-				if (!this.controller.parentPicker.HasFlash)
+				if (guidanceLevel.IntValue == 1)
 				{
-					this.controller.flashButton.Enabled = false;
-					// TODO: remove flash button from toolBar
-					/*
-					NSMutableArray * items = [[toolBar items] mutableCopy];
-					[items removeObject:flashButton];
-					[toolBar setItems:items animated:NO];
-					[items release];
-					*/
+					textCue.Text = "Try moving the camera close to each part of the barcode";
 				}
-				else
+				else if (guidanceLevel.IntValue == 2)
 				{
-					this.controller.flashButton.Enabled = true;
-					this.controller.flashButton.Style = UIBarButtonItemStyle.Bordered;
+					textCue.Text = (NSString) status.ObjectForKey (new NSString ("PartialBarcode"));
 				}
-			}
-			
-			public override void StatusUpdated (BarcodePickerController picker, NSDictionary status)
-			{
-				NSNumber isValid = (NSNumber) status.ObjectForKey (new NSString ("Valid"));
-				NSNumber inRange = (NSNumber) status.ObjectForKey (new NSString ("InRange"));
-				
-				controller.SetArrows (inRange.BoolValue, true);
-				
-				if (isValid.BoolValue)
+				else 
 				{
-					controller.BeepOrVibrate ();
-					
-					NSString barcode = (NSString)status.ObjectForKey (new NSString ("EAN"));
-					picker.ReturnBarcode (barcode.ToString (), status);
+					textCue.Text = "";
 				}
 			}
 		}

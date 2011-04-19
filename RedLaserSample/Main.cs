@@ -3,6 +3,7 @@
  * 
  * Chris Branson, November 2009
  * Chris Branson, August 2010 - updated to support RedLaser SDK 2.8.2
+ * Chris Branson, April 2011 - updated to support RedLaser SDK 3.0.0
  * 
  * This is the sample view controller and demonstrates initialisation of
  * the barcode picker controller, setting of properties and handling
