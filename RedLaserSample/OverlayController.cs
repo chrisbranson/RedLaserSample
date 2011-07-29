@@ -196,7 +196,7 @@ namespace RedLaserSample
 			else
 				setLandscapeLayout ();
 			
-			if (!ParentPicker.HasFlash)
+			if (!ParentPicker.HasFlash())
 			{
 				flashButton.Enabled = false;
 			}

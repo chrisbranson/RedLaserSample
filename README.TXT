@@ -1,21 +1,13 @@
 This MonoDevelop solution is a MonoTouch implementation of the RedLaser SDK sample (http://www.redlaser.com/SDK.aspx).
 
-This solution requires iOS4 or higher and has been tested using RedLaser SDK v3.0.0, MonoTouch v3.2.6 and MonoDevelop 2.4 & 2.6.
+This solution requires iOS4 or higher and has been tested using RedLaser SDK v3.1.1, MonoTouch v4.0.4.1 and MonoDevelop 2.6 beta 3.
 
 The solution is self contained and will compile only for the device as the RedLaser SDK requires access to camera hardware which is obviously not present on the simulator.
 
-The project build options includes the neccessary additional compiler commands and frameworks.
+The project build options includes the neccessary additional compiler commands and frameworks. The most notable being Linker Behavior set to "Don't link".
 
-Finally, to get this solution to build properly you will need to temporarily force use of the g++ compiler/linker instead of gcc. This is because the RedLaser SDK makes use of some standard c++ class libraries which. A dummy compiled c++ file (x.o and x_sim.o) is included in the solution to force g++ to include the relevant libraries.
+Finally, to get this solution to build properly the g++ compiler/linker must be used instead of gcc (the new -cxx option is specified in the build options to enable this).
+The RedLaser SDK makes use of some standard c++ class libraries therefore a dummy compiled c++ file (x.o and x_sim.o) is included in the solution to trigger g++ to include the relevant libraries.
 
-To force the use of g++ perform the following steps;
-
-1. Open a terminal window
-2. cd /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin
-3. mv gcc-4.2 gcc-4.2.org
-4. ln -s g++-4.2 gcc-4.2
-
-You can then switch between the two compilers by removing/adding the symlink. I have seen no ill effects from using g++ all the time, ymmv.
-
-Chris Branson, April 2011
+Chris Branson, July 2011
 https://github.com/chrisbranson/RedLaserSample
