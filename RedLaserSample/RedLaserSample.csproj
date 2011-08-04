@@ -27,8 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>True</MtouchDebug>
-    <MtouchExtraArgs>-cxx -gcc_flags="${ProjectDir}/Lib/x_sim.o -framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -L${ProjectDir}/Lib -lRedLaserSDK -lz.1.2.3 -ObjC"
-</MtouchExtraArgs>
+    <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
     <MtouchArch>ARMv6</MtouchArch>
@@ -42,13 +41,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchDebug>False</MtouchDebug>
-    <MtouchExtraArgs>-cxx -gcc_flags="${ProjectDir}/Lib/x_sim.o -framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -L${ProjectDir}/Lib -lRedLaserSDK -lz.1.2.3 -ObjC"
-</MtouchExtraArgs>
+    <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
     <MtouchArch>ARMv6</MtouchArch>
     <MtouchUseThumb>false</MtouchUseThumb>
     <MtouchUseSGen>false</MtouchUseSGen>
+    <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,7 +59,7 @@
     <WarningLevel>4</WarningLevel>
     <MtouchDebug>True</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchExtraArgs>-cxx -gcc_flags="${ProjectDir}/Lib/x.o -framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -L${ProjectDir}/Lib -lRedLaserSDK -lz.1.2.3 -ObjC"</MtouchExtraArgs>
+    <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
     <MtouchLink>None</MtouchLink>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
@@ -76,13 +75,13 @@
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>False</MtouchDebug>
-    <MtouchExtraArgs>-v -v -v -cxx -gcc_flags="${ProjectDir}/Lib/x.o -framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -L${ProjectDir}/Lib -lRedLaserSDK -lz.1.2.3 -ObjC"</MtouchExtraArgs>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
+    <MtouchArch>ARMv6_ARMv7</MtouchArch>
     <MtouchUseThumb>false</MtouchUseThumb>
     <MtouchUseSGen>false</MtouchUseSGen>
-    <MtouchLink>None</MtouchLink>
+    <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
+    <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

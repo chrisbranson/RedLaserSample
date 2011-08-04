@@ -4,10 +4,9 @@ This solution requires iOS4 or higher and has been tested using RedLaser SDK v3.
 
 The solution is self contained and will compile only for the device as the RedLaser SDK requires access to camera hardware which is obviously not present on the simulator.
 
-The project build options includes the neccessary additional compiler commands and frameworks. The most notable being Linker Behavior set to "Don't link".
+The project build options includes the neccessary additional compiler commands and frameworks.
 
-Finally, to get this solution to build properly the g++ compiler/linker must be used instead of gcc (the new -cxx option is specified in the build options to enable this).
-The RedLaser SDK makes use of some standard c++ class libraries therefore a dummy compiled c++ file (x.o and x_sim.o) is included in the solution to trigger g++ to include the relevant libraries.
+Finally, to get this solution to build properly the g++ compiler/linker must be used instead of gcc. The new -cxx option is specified in the build options to enable this.
 
-Chris Branson, July 2011
+Chris Branson, 4th August 2011
 https://github.com/chrisbranson/RedLaserSample
