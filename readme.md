@@ -15,7 +15,7 @@ This project uses the RedLaser MonoTouch bindings (https://github.com/chrisbrans
 
 The solution includes the necessary additional compiler commands and frameworks and will compile only for the device as the RedLaser SDK requires access to camera hardware which is obviously not present on the simulator.
 
-As the RedLaser SDK makes use of certain c++ libraries the **g++** compiler/linker must be used instead of **gcc**. The new (from MonoTouch v.4.x) '-cxx' option is specified in the build options to enable this.
+As the RedLaser SDK makes use of certain c++ libraries the **g++** compiler/linker must be used instead of **gcc**. The '-cxx' option is specified in the build options to enable this.
 
 ##
 
