@@ -1,11 +1,11 @@
 # RedLaser Sample
 
-This MonoDevelop solution is a MonoTouch implementation of the RedLaser SDK sample application (http://www.redlaser.com/SDK.aspx).
+A MonoTouch implementation of the RedLaser SDK sample application (http://www.redlaser.com/SDK.aspx).
 
 ### Requirements
 
 * iOS 4 or higher
-* RedLasker SDK v3.1.1
+* RedLaser SDK v3.1.1
 * MonoTouch v4.0.4.1
 * MonoDevelop 2.6 beta 3
 
