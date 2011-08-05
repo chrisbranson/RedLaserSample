@@ -16,6 +16,7 @@
     <BundleDisplayName>RL C# Sample</BundleDisplayName>
     <MtouchMinimumOS>3.1</MtouchMinimumOS>
     <MainNibFile>MainWindow.xib</MainNibFile>
+    <BundleIconHigh>Icon.png</BundleIconHigh>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +45,7 @@
     <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
+    <MtouchArch>ARMv6_ARMv7</MtouchArch>
     <MtouchUseThumb>false</MtouchUseThumb>
     <MtouchUseSGen>false</MtouchUseSGen>
     <MtouchLink>Full</MtouchLink>
@@ -117,8 +118,6 @@
   <ItemGroup>
     <None Include="Lib\libRedLaserSDK.a" />
     <None Include="Icon.png" />
-    <None Include="Lib\x_sim.o" />
-    <None Include="Lib\x.o" />
     <None Include="Info.plist" />
     <None Include="..\README.TXT">
       <Link>README.TXT</Link>
