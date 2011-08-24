@@ -28,7 +28,7 @@
     <WarningLevel>4</WarningLevel>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>True</MtouchDebug>
-    <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
+    <MtouchExtraArgs>-cxx -gcc_flags="-lgcc_eh -framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
     <MtouchArch>ARMv6</MtouchArch>
@@ -42,7 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchDebug>False</MtouchDebug>
-    <MtouchExtraArgs>-cxx -gcc_flags="-framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
+    <MtouchExtraArgs>-cxx -gcc_flags="-lgcc_eh -framework SystemConfiguration -framework CFNetwork -framework CoreVideo -framework CoreMedia -framework AVFoundation -framework OpenGLES -framework Security -L${ProjectDir}/Lib -lRedLaserSDK -ObjC"</MtouchExtraArgs>
     <MtouchI18n />
     <MtouchUseLlvm>false</MtouchUseLlvm>
     <MtouchArch>ARMv6_ARMv7</MtouchArch>
@@ -119,8 +119,8 @@
     <None Include="Lib\libRedLaserSDK.a" />
     <None Include="Icon.png" />
     <None Include="Info.plist" />
-    <None Include="..\README.TXT">
-      <Link>README.TXT</Link>
+    <None Include="..\readme.md">
+      <Link>readme.md</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
