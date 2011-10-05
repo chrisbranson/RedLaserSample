@@ -6,7 +6,7 @@ A MonoTouch implementation of the RedLaser SDK sample application (http://www.re
 
 * iOS 4 or higher
 * RedLaser SDK v3.2.0
-* MonoTouch v4.0.4.1
+* MonoTouch v4.2.2
 * MonoDevelop 2.6
 
 ### Notes
