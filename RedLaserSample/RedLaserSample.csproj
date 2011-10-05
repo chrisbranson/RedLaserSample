@@ -109,6 +109,7 @@
     <Compile Include="RLSampleViewController.xib.designer.cs">
       <DependentUpon>RLSampleViewController.xib</DependentUpon>
     </Compile>
+    <Compile Include="RedLaserSDK.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Lib\" />
@@ -128,6 +129,7 @@
     <Content Include="Images\bolt.png" />
     <Content Include="Images\powered_by_redlaser.png" />
     <Content Include="Images\powered_by_redlaser%402x.png" />
+    <Content Include="RedLaser_License.xml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />

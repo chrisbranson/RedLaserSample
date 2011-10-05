@@ -13,20 +13,29 @@
  * 
  */
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
 using System.Drawing;
 using System.Collections.Generic;
-using MonoTouch.ObjCRuntime;
-using System;
 
-using RedLaser;
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using MonoTouch.RedLaser;
 
 namespace RedLaserSample
 {
 	public partial class RLSampleViewController : UIViewController
 	{
 		public RLSampleViewController (IntPtr handle) : base (handle) { }
+		
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			
+			RedLaserStatus status = RedLaserSDK.CheckReadyStatus();
+			string sdkVer = RedLaserSDK.GetRedLaserSDKVersion();
+			
+			barcodeTextLabel.Text = string.Format("Status: {0}, SDK Ver: {1}", status.ToString(), sdkVer);
+		}
 		
 		partial void scanPressed (MonoTouch.UIKit.UIBarButtonItem sender)
 		{
@@ -41,7 +50,7 @@ namespace RedLaserSample
 				// Initialize with portrait mode as default
 				picker.Orientation = UIImageOrientation.Up;
 				
-				// The active scanning region size is set in OverlayController.m
+				// The active scanning region size is set in OverlayController.cs
 			}
 			
 			// Update barcode on/off settings
@@ -75,6 +84,7 @@ namespace RedLaserSample
 			if (btype == RLBarcodeType.EAN13)
 			{
 				// Use first digit to differentiate between EAN13 and UPCA
+				// An EAN13 barcode whose first digit is zero is exactly the same as a UPCA barcode.
 				if (result.BarcodeString[0] == '0')
 				{
 					barcodeTextLabel.Text = result.BarcodeString.Substring (1);
@@ -93,7 +103,7 @@ namespace RedLaserSample
 			else if (btype == RLBarcodeType.STICKY) typeLabel.Text = "STICKYBITS";
 		}
 		
-		private class BarcodePickerDelegate : RedLaser.BarcodePickerControllerDelegate
+		private class BarcodePickerDelegate : BarcodePickerControllerDelegate
 		{
 			RLSampleViewController controller;
 			

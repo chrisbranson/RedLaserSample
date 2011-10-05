@@ -26,7 +26,7 @@ using MonoTouch.AudioToolbox;
 using MonoTouch.CoreGraphics;
 using MonoTouch.CoreAnimation;
 
-using RedLaser;
+using MonoTouch.RedLaser;
 
 namespace RedLaserSample
 {
